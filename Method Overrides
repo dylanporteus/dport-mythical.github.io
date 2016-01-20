@@ -1,0 +1,12 @@
+<!--Method Overrides only work in Sinatra-->
+
+<form method="post" action="/superheroes/<%=hero["id"]%>">
+<input type="hidden" name="_method" value="DELETE">
+<input type="submit" value="DELETE THIS PERSON">
+</form>
+
+
+
+<!--Inside class in the server.rb, placed above all the route handlers and below class Server < Sinatra::Base-->
+
+set :method_override, true  
