@@ -20,3 +20,22 @@ For the "you are signed in as username" code, it can be pasted as is into the er
 		<% else %>
 		Please Login or Signup
 		<%end %></pre>
+
+
+		Topics:
+
+		<label for="topics_id">Topic:</label>
+            <select name="topics_id">
+            <% @topics.each do |topic| %>
+            <option value="<%= "#{topic['id']}" %>"><%= "#{topic['name']}" %></option>
+            <%end%>    
+            </select>
+
+            
+get '/create' do
+     db = database_connection
+     # put this variable in get so the variable can be accessed in our drop down menu
+     @topics = db.exec("SELECT * FROM topics").to_a
+
+     erb :create
+   end
