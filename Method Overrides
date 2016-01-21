@@ -1,3 +1,4 @@
+Notes on Method Overrides
 <!--Method Overrides only work in Sinatra-->
 
 <form method="post" action="/superheroes/<%=hero["id"]%>">
