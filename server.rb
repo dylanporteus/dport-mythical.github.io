@@ -10,6 +10,18 @@ require "bcrypt"
 
 		@@db = PG.connect(dbname: "mythical_db_test")
 
+		def current_user
+			if session["user_id"]
+				@user ||= @@db.exec_params(<<-SQL, [session["user_id"]]).first
+				  SELECT * FROM users WHERE id = $2
+				SQL
+			else
+				#The empty object will signify that a user is not logged in.
+			   {}
+			end
+		end
+
+
 		get "/" do 
 			redirect "/signup"
 		end
@@ -29,6 +41,27 @@ require "bcrypt"
 
 			erb :signup_success
 
+		end
+
+
+		get "/login" do 
+           erb :login 
+		end
+
+		post "/login" do
+         @user = @@db.exec_params("SELECT * FROM users WHERE username = $1", [params[:login_name]]).first
+         if @user 
+         	if BCrypt::Password.new(@user["password_digest"]) == params[:login_password]
+         	  session["user_id"] = @user["id"]
+         	  redirect "/"
+         	else
+         		@error = "Invalid Password"
+         		erb :login 
+         	end
+         else
+         	@error = "Invalid Username"
+         	erb :login 
+         end
 		end
 
 
