@@ -3,12 +3,11 @@
 <% if @error %><%= @error %><% end %>
 
 <form method="post" action="/login">
-<label for="email">Enter your email: </label><br/>
-<input type="email" name="email" /><br/>
 <label for="username">Enter your username: </label><br/>
 <input type="text" name="username" /><br/>
-<label for="login_password">Enter your password: </label><br/>
-<input type="password" name="login_password" /><br/>
+<label for="password">Enter your password: </label><br/>
+<input type="password" name="password" /><br/>
 <input type="submit" value="Log In">
+<a href="/signup">Sign Up</a>
 	
 </form>

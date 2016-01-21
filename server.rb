@@ -13,7 +13,7 @@ require "bcrypt"
 		def current_user
 			if session["user_id"]
 				@user ||= @@db.exec_params(<<-SQL, [session["user_id"]]).first
-				  SELECT * FROM users WHERE id = $2
+				  SELECT * FROM users WHERE id = $1
 				SQL
 			else
 				#The empty object will signify that a user is not logged in.
@@ -31,10 +31,10 @@ require "bcrypt"
 		end
 
 		post "/signup" do 
-			encrypted_password = BCrypt::Password.create(params[:login_password])
+			encrypted_password = BCrypt::Password.create(params[:password])
 
-			users = @@db.exec_params(<<-SQL, [params[:email], params[:username], encrypted_password])
-			  INSERT INTO users (email, username, password_digest) VALUES ($1, $2, $3) RETURNING id;
+			users = @@db.exec_params(<<-SQL, [params[:username], encrypted_password])
+			  INSERT INTO users (username, password_digest) VALUES ($1, $2) RETURNING id;
 			SQL
 
 			session["user_id"] = users.first["id"]
@@ -49,9 +49,9 @@ require "bcrypt"
 		end
 
 		post "/login" do
-         @user = @@db.exec_params("SELECT * FROM users WHERE username = $1", [params[:login_name]]).first
+         @user = @@db.exec_params("SELECT * FROM users WHERE username = $1", [params[:username]]).first
          if @user 
-         	if BCrypt::Password.new(@user["password_digest"]) == params[:login_password]
+         	if BCrypt::Password.new(@user["password_digest"]) == params[:password]
          	  session["user_id"] = @user["id"]
          	  redirect "/"
          	else
