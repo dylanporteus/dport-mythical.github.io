@@ -11,3 +11,12 @@ Notes on Method Overrides
 <!--Inside class in the server.rb, placed above all the route handlers and below class Server < Sinatra::Base-->
 
 set :method_override, true  
+
+Notes:
+For the "you are signed in as username" code, it can be pasted as is into the erb that you want, or the below if/else statement can be used if placing in layout.
+
+<pre><% if current_user %>
+		Hello, <%= current_user['username'] %>!
+		<% else %>
+		Please Login or Signup
+		<%end %></pre>
