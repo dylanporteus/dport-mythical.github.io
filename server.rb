@@ -54,7 +54,7 @@ require "bcrypt"
          	if BCrypt::Password.new(@user["password_digest"]) == params[:password]
          	  session["user_id"] = @user["id"]
          	  
-         	  erb :signup_success
+         	  redirect "/login_success"
          	else
          		@error = "Invalid Password"
          		erb :login 
@@ -63,6 +63,12 @@ require "bcrypt"
          	@error = "Invalid Username"
          	erb :login 
          end
+
+
+		end
+
+		get "/login_success" do 
+			erb :login_success
 		end
 
 
