@@ -14,7 +14,8 @@ require "pry"
 		def current_user
 			if session["user_id"]
 				@user ||= @@db.exec_params(<<-SQL, [session["user_id"]]).first
-				  SELECT * FROM users WHERE id = $1
+				  SELECT * FROM users 
+				  WHERE id = $1
 				SQL
 			else
 				#The empty object will signify that a user is not logged in.
@@ -35,7 +36,8 @@ require "pry"
 			encrypted_password = BCrypt::Password.create(params[:password])
 
 			users = @@db.exec_params(<<-SQL, [params[:username], encrypted_password])
-			  INSERT INTO users (username, password_digest) VALUES ($1, $2) RETURNING id;
+			  INSERT INTO users (username, password_digest) 
+			  VALUES ($1, $2) RETURNING id;
 			SQL
 
 			session["user_id"] = users.first["id"]

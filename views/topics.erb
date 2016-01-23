@@ -8,13 +8,13 @@
 
 <form class="new_topic" action="/topics" method="post">
 <div class="input-row">
-  <ul>
-  <% @new_topics.each do |topic| %>
-   <li><%= topic["topic_title"] %> - by <%= topic["username"] %></li>
-  <% end %>
-  </ul>
       <label for="topic_title">Enter a Topic Title:</label><br />
       <textarea name="topic"></textarea><br />
       <input class="topic-create" type="submit" value="Create Topic"/>
+  <ul>
+  <% @new_topics.each do |topic| %>
+   <li><%=  "#{topic['topic_title']}" %> - by <%= "#{topic['username']}" %></li>
+  <% end %>
+  </ul>
 </div>
 </form>
