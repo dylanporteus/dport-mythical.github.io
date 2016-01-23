@@ -76,7 +76,10 @@ require "pry"
 
 		
 		get "/topics" do
-		@new_topics = @@db.exec_params("SELECT topics.*, users.username FROM topics LEFT JOIN users ON topics.user_id = users.id").to_a 
+		@new_topics = @@db.exec_params("SELECT topics.*, users.username 
+			FROM topics 
+			LEFT JOIN users 
+			ON topics.user_id = users.id").to_a 
 			erb :topics
 		end
 		
@@ -88,6 +91,11 @@ require "pry"
 			
 			user_id = session["user_id"] 
 			
+			@new_topics = @@db.exec_params("SELECT topics.*, users.username 
+			FROM topics 
+			LEFT JOIN users 
+			ON topics.user_id = users.id").to_a 
+
 			topics = @@db.exec_params(<<-SQL, [params[:topic_title], user_id]) 
 			INSERT INTO topics (topic_title, user_id) 
 			VALUES ($1, $2) RETURNING id;

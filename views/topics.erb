@@ -13,7 +13,7 @@
       <input class="topic-create" type="submit" value="Create Topic"/>
   <ul>
   <% @new_topics.each do |topic| %>
-   <li><%=  "#{topic['topic_title']}" %> - by <%= "#{topic['username']}" %></li>
+   <li><%=  topic['topic_title'] %> - by <%= "#{topic['username']}" %></li>
   <% end %>
   </ul>
 </div>
