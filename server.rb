@@ -1,6 +1,7 @@
 require "sinatra/base"
 require "pg"
 require "bcrypt"
+require "pry"
 
 
 
@@ -69,6 +70,28 @@ require "bcrypt"
 
 		get "/login_success" do 
 			erb :login_success
+		end
+
+		
+		get "/topics" do
+		@new_topics = @@db.exec_params("SELECT topics.*, users.username FROM topics LEFT JOIN users ON topics.user_id = users.id").to_a 
+			erb :topics
+		end
+		
+
+
+
+
+		post "/topics" do 
+			
+			user_id = session["user_id"] 
+			
+			topics = @@db.exec_params(<<-SQL, [params[:topic_title], user_id]) 
+			INSERT INTO topics (topic_title, user_id) 
+			VALUES ($1, $2) RETURNING id;
+			SQL
+
+			erb :topics
 		end
 
 
