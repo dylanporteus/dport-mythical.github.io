@@ -3,17 +3,21 @@
 
 <h2>Topics</h2>
 
-<a href="login_success">Main Page</a>
-
+  <ul class="navbar">
+<li><a href="/login_success">Main Page</a></li>
+<li><a href="/topics">Topics</a></li>
+<li><a href="/monsterpedia">Monsterpedia</a></li>
+    </ul>
 
 <form class="new_topic" action="/topics" method="post">
 <div class="input-row">
       <label for="topic_title">Enter a Topic Title:</label><br />
-      <textarea name="topic_title"></textarea><br />
+      <input type="text" name="topic_title" /><br />
       <input class="topic-create" type="submit" value="Create Topic"/>
   <ul>
   <% @new_topics.each do |topic| %>
-   <li><%=  topic['topic_title'] %> - by <%= "#{topic['username']}" %></li>
+      <a href="/topics/<%= "#{topic['id']}" %>">
+   <li><%=  topic['topic_title'] %> - by <%= topic['username'] %></li></a>
   <% end %>
   </ul>
 </div>
