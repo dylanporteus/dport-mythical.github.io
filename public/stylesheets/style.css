@@ -1,0 +1,33 @@
+@import url("http://fnt.webink.com/wfs/webink.css/?project=548D2AB5-FEF2-4BB9-BA39-A9506DCC5723&fonts=81DCB682-CEF0-F2EE-50B4-29BCB883721E:f=Ablefont");
+@import url(http://fonts.googleapis.com/css?family=Irish+Grover);
+
+form{
+	background-image: url('background1.jpg');
+}
+
+h1, h2{
+	color: black;
+	font-family: Ablefont, Irish Grover;
+	text-decoration: overline underline;
+	text-align: center;
+}
+
+a{
+	color: #8a1ec2;
+	padding: 3px;
+}
+
+
+a:active {
+    color: #d922db;
+    text-decoration: none;
+}
+
+pre{
+	background: rgba(120,45,215, 0.5);
+	font-family: Ablefont, Irish Grover;
+}
+
+ul.navbar li {
+	display: inline-block;
+}

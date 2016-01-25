@@ -76,6 +76,9 @@ require "pry"
 
 		
 		get "/topics" do
+             
+             user_id = session["user_id"]
+
 		@new_topics = @@db.exec_params("SELECT topics.*, users.username 
 			FROM topics 
 			LEFT JOIN users 
@@ -97,13 +100,33 @@ require "pry"
 			VALUES ($1, $2) RETURNING id;
 			SQL
 
-			@new_topics = @@db.exec_params("SELECT topics.*, users.username 
-			FROM topics 
+			@new_topics = @@db.exec("SELECT topics.*, users.username FROM topics 
 			LEFT JOIN users 
 			ON topics.user_id = users.id").to_a 
 			
 			erb :topics
 		end
+
+		get "/topics/:id" do 
+			@topic_title = params[:topic_title]
+			@username = @@db.exec("SELECT topics.*, users.username FROM topics LEFT JOIN users ON topics.user_id = users.id").to_a 			
+			@single_topic = @@db.exec("SELECT * FROM topics WHERE id = #{params["id"].to_i}").first
+
+			erb :topic 
+		end
+
+		get "/comments" do 
+			
+			user_id = session["user_id"]
+
+			comments = @@db.exec_params(<<-SQL, [params[:comment_text], user_id, topic_id])
+			INSERT INTO comments (comment_text, user_id, topic_id)
+			VALUES ($1, $2, $3) RETURNING id;
+			SQL
+
+			@new_comments = @@db.exec("SELECT SELECT * FROM users LEFT JOIN blogs ON topics.user_id = users.id LEFT JOIN comments").to_a
+			erb :topic  
+		end 
 
 
 

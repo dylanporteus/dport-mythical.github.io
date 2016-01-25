@@ -55,4 +55,9 @@ get '/create' do
 
    TRIPLE JOIN
 
-   SELECT * FROM users LEFT JOIN blogs ON posts.user_id = users.id LEFT JOIN comments;
+   SELECT * FROM users LEFT JOIN blogs ON topics.user_id = users.id LEFT JOIN comments;
+
+
+
+   
+topic_id = db.exec("SELECT * FROM topics LEFT JOIN comments ON topics.id = topic_id", ).first)
