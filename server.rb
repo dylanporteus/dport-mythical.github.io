@@ -109,8 +109,8 @@ require "pry"
 
 		get "/topics/:id" do 
 			@topic_title = params[:topic_title]
-			@username = @@db.exec("SELECT topics.*, users.username FROM topics LEFT JOIN users ON topics.user_id = users.id").to_a 			
-			@single_topic = @@db.exec("SELECT * FROM topics WHERE id = #{params["id"].to_i}").first
+			@single_topic = @@db.exec("SELECT topics.*, users.username FROM topics LEFT JOIN users ON topics.user_id = users.id WHERE topics.id = $1", [params["id"]]).first
+			# @single_topic = @@db.exec("SELECT * FROM topics WHERE id = #{params["id"].to_i}").first
 
 			erb :topic 
 		end

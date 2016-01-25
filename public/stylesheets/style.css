@@ -1,20 +1,42 @@
 @import url("http://fnt.webink.com/wfs/webink.css/?project=548D2AB5-FEF2-4BB9-BA39-A9506DCC5723&fonts=81DCB682-CEF0-F2EE-50B4-29BCB883721E:f=Ablefont");
 @import url(http://fonts.googleapis.com/css?family=Irish+Grover);
 
+body{
+	background-color: rgba(0,0,0,0.75);
+	/*background-image: ('background1.jpg');*/
+}
+
 form{
-	background-image: url('background1.jpg');
+	font-size: 20px;
+	padding: 3px;
+	text-align: center;
+	color: #25b7e1;
+
 }
 
 h1, h2{
-	color: black;
+    background-color: rgba(0,0,0,1);
+	color: #25b7e1;
 	font-family: Ablefont, Irish Grover;
 	text-decoration: overline underline;
 	text-align: center;
+	line-height: 4em;
+}
+
+p{
+	font-size: 30px;
+	font-family: Trajan;
+	text-align: center;
+	border: 4px solid cornflowerblue;
+	color: #25b7e1;
+	padding: 10px;
 }
 
 a{
 	color: #8a1ec2;
 	padding: 3px;
+	list-style-type: none;
+	font-size: 25px;
 }
 
 
@@ -26,8 +48,15 @@ a:active {
 pre{
 	background: rgba(120,45,215, 0.5);
 	font-family: Ablefont, Irish Grover;
+	font-size: 20px;
 }
 
 ul.navbar li {
-	display: inline-block;
+	display: inline;
+	background-color: black;
+	font-family: Ablefont, Irish Grover;
+	font-size: 25px;
+	padding: 5px;
+	margin-left: 10px;
+
 }

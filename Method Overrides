@@ -58,6 +58,20 @@ get '/create' do
    SELECT * FROM users LEFT JOIN blogs ON topics.user_id = users.id LEFT JOIN comments;
 
 
+USE THIS FOR COMMENTS
+         <form class="new_comment" action="/comments" method="post">
+<div class="input-row">
+      <label for="comment_text">Enter a Comment:</label><br />
+      <input type="text" name="comment_text" /><br />
+      <input class="comment-add" type="submit" value="Add Comment"/>
+  <ul>
+  <% @new_comments.each do |comment| %>
+      <a href="/topics/<%= "#{comment['id']}" %>">
+   <li><%=  comment['comment_text'] %> - by <%= comment['username'] %></li></a>
+  <% end %>
+  </ul>
+
+
 
    
 topic_id = db.exec("SELECT * FROM topics LEFT JOIN comments ON topics.id = topic_id", ).first)
